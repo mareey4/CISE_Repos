@@ -18,3 +18,15 @@ test('increments count when button is clicked', async () => {
     expect(updatedCountElement).toBeInTheDocument();
   });
 });
+
+// Intentionally failing test to demonstrate failure
+test('failing test: count does not increment to 2 when button is clicked once', async () => {
+  render(<App />);
+  const buttonElement = screen.getByText(/Increment count/i);
+  fireEvent.click(buttonElement);
+
+  await waitFor(() => {
+    const updatedCountElement = screen.queryByText(/Count: 2/i);
+    expect(updatedCountElement).toBeInTheDocument();  // This will fail
+  });
+});
